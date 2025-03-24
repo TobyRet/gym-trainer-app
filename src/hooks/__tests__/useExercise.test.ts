@@ -8,7 +8,7 @@ const initialExercise: Exercise = {
   targetRepRange: 'medium',
   weight: 0,
   reps: 0,
-  rir: 0,
+  rir: undefined as any,
   currentSet: 1,
 };
 
@@ -53,14 +53,15 @@ describe('useExercise', () => {
   });
 
   it('should return true when handleSetComplete is called on the last set', async () => {
-    const { result } = renderHook(() => useExercise(initialExercise));
+    const lastSetExercise: Exercise = {
+      ...initialExercise,
+      currentSet: 3,
+      weight: 50,
+      reps: 10,
+      rir: 2,
+    };
 
-    act(() => {
-      result.current.handleInputChange('weight', '50');
-      result.current.handleInputChange('reps', '10');
-      result.current.handleInputChange('rir', '2');
-      result.current.exercise.currentSet = 3;
-    });
+    const { result } = renderHook(() => useExercise(lastSetExercise));
 
     let isComplete;
     await act(async () => {
