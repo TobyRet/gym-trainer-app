@@ -8,7 +8,7 @@ const initialExercise: Exercise = {
   targetRepRange: 'medium',
   weight: 0,
   reps: 0,
-  rir: undefined as any,
+  rir: undefined,
   currentSet: 1,
 };
 

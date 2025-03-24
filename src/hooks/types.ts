@@ -6,7 +6,7 @@ export interface Exercise {
   targetRepRange: RepRange;
   weight: number;
   reps: number;
-  rir: number;
+  rir?: number;
   currentSet: number;
 }
 

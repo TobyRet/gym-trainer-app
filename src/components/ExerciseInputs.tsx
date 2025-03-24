@@ -1,14 +1,16 @@
-import { Exercise, ExerciseErrors } from '../hooks/useExercise';
+import { Exercise, ExerciseErrors } from '../hooks/types';
+
+type NumericInputField = 'weight' | 'reps' | 'rir';
 
 interface ExerciseInputsProps {
   exercise: Exercise;
   errors: ExerciseErrors;
   hasSubmitted: boolean;
-  onInputChange: (field: keyof Exercise, value: string) => void;
+  onInputChange: (field: NumericInputField, value: string) => void;
 }
 
 export function ExerciseInputs({ exercise, errors, hasSubmitted, onInputChange }: ExerciseInputsProps) {
-  const getInputClassName = (field: keyof Exercise) => {
+  const getInputClassName = (field: NumericInputField) => {
     const baseClasses = "w-full px-4 py-3 border rounded-lg text-gray-900 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200";
     if (hasSubmitted && errors[field]) {
       return `${baseClasses} border-red-500`;
@@ -27,9 +29,7 @@ export function ExerciseInputs({ exercise, errors, hasSubmitted, onInputChange }
           type="number"
           value={exercise.weight || ''}
           onChange={(e) => onInputChange('weight', e.target.value)}
-          className={`w-full px-4 py-3 border rounded-lg text-gray-900 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ${
-            hasSubmitted && errors.weight ? 'border-red-500' : 'border-gray-200 hover:border-gray-300'
-          }`}
+          className={getInputClassName('weight')}
           aria-invalid={hasSubmitted && !!errors.weight ? 'true' : 'false'}
           aria-describedby={hasSubmitted && errors.weight ? 'weight-error' : undefined}
         />
@@ -49,9 +49,7 @@ export function ExerciseInputs({ exercise, errors, hasSubmitted, onInputChange }
           type="number"
           value={exercise.reps || ''}
           onChange={(e) => onInputChange('reps', e.target.value)}
-          className={`w-full px-4 py-3 border rounded-lg text-gray-900 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ${
-            hasSubmitted && errors.reps ? 'border-red-500' : 'border-gray-200 hover:border-gray-300'
-          }`}
+          className={getInputClassName('reps')}
           aria-invalid={hasSubmitted && !!errors.reps ? 'true' : 'false'}
           aria-describedby={hasSubmitted && errors.reps ? 'reps-error' : undefined}
         />
@@ -73,9 +71,7 @@ export function ExerciseInputs({ exercise, errors, hasSubmitted, onInputChange }
           max="4"
           value={exercise.rir || ''}
           onChange={(e) => onInputChange('rir', e.target.value)}
-          className={`w-full px-4 py-3 border rounded-lg text-gray-900 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ${
-            hasSubmitted && errors.rir ? 'border-red-500' : 'border-gray-200 hover:border-gray-300'
-          }`}
+          className={getInputClassName('rir')}
           aria-invalid={hasSubmitted && !!errors.rir ? 'true' : 'false'}
           aria-describedby={hasSubmitted && errors.rir ? 'rir-error' : undefined}
         />

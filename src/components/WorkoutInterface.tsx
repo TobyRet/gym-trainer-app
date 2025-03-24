@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useExercise, Exercise } from '../hooks/useExercise';
+import { useExercise } from '../hooks/useExercise';
 import { RepRangeButtons } from './RepRangeButtons';
 import { ExerciseInputs } from './ExerciseInputs';
 import { ExerciseVideoModal } from './ExerciseVideoModal';
@@ -26,8 +26,8 @@ export function WorkoutInterface() {
     reps: 0,
   });
 
-  const onSetComplete = () => {
-    const isComplete = handleSetComplete();
+  const onSetComplete = async () => {
+    const isComplete = await handleSetComplete();
     if (isComplete) {
       // TODO: Navigate to results page
       console.log('Exercise completed!');
